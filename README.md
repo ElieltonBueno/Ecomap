@@ -32,3 +32,4 @@ O PI é diferente do Trabalho de Conclusão de Curso (TCC) porque busca promover
 O PI pode ser elaborado individualmente ou em grupo de até 4 pessoas. A sua elaboração está dividida em três etapas: Definição do tema gerador, Apresentação do pré-projeto, Execução do Projeto Integrador. 
 O PI é uma abordagem inovadora na avaliação de ensino, que considera não apenas o conhecimento teórico, mas também as habilidades práticas e socioemocionais dos alunos. 
 O PI prepara os alunos para o mercado de trabalho, pois os ajuda a adquirir conhecimentos que integram teorias às expectativas do mercado.
+<br />
