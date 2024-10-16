@@ -3,7 +3,7 @@
 
 ## 🔖 Informaçoes sobre o EcoMap <br/>
 
-O <strong>Ecoleta</strong> é um marketplace de coleta de resíduos, esta aplicação web tem como objetivo ajudar as pessoas a encontrarem pontos de coleta de forma eficiente. <br/>
+O <strong>EcoMap</strong> é um marketplace de coleta de resíduos, esta aplicação web tem como objetivo ajudar as pessoas a encontrarem pontos de coleta de forma eficiente. <br/>
 
 
 ## 🚀 Tecnologias utilizadas <br/>
