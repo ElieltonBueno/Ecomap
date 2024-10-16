@@ -17,6 +17,7 @@ O <strong>EcoMap</strong> é um marketplace de coleta de resíduos, esta aplica�
 
 ## :man_technologist: Skills Praticadas
 
+  - :heavy_check_mark: HTML5 
   - :heavy_check_mark: CSS - Flexbox and Grid 
   - :heavy_check_mark: Layout Responsive
   - :heavy_check_mark: MySQL
