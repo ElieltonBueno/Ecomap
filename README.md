@@ -1,7 +1,4 @@
-<h3 align="center">
-    <img width="300px" src="https://i.imgur.com/thB3TEi.png">
-    <br><br>
-</h3>
+#Ecomap
 
 
 ## 🔖 Informaçoes sobre o EcoMap <br/>
