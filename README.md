@@ -1,9 +1,9 @@
-## Ecomap <br/>
+## Ecomap 2.0 <br/>
 
 
-## 🔖 Informaçoes sobre o EcoMap <br/>
+## 🔖 Informaçoes sobre o EcoMap 2.0 <br/>
 
-O <strong>EcoMap</strong> é um marketplace de coleta de resíduos, esta aplicação web tem como objetivo ajudar as pessoas a encontrarem pontos de coleta de forma eficiente. <br/>
+O <strong>EcoMap 2.0</strong> é um marketplace de coleta de resíduos, esta aplicação web tem como objetivo ajudar as pessoas a encontrarem pontos de coleta de forma eficiente. <br/>
 
 
 ## 🚀 Tecnologias utilizadas <br/>
