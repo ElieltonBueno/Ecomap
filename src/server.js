@@ -46,8 +46,10 @@ server.post("/savepoint", (req, res) => {
             address2,
             state,
             city,
-            items
-        ) VALUES (?,?,?,?,?,?,?);
+            items,
+            lat,
+            lng
+        ) VALUES (?,?,?,?,?,?,?,?,?);
     `
 
     const values = [
@@ -57,7 +59,9 @@ server.post("/savepoint", (req, res) => {
         req.body.address2,
         req.body.state,
         req.body.city,
-        req.body.items
+        req.body.items,
+        req.body.lat,
+        req.body.lng
     ]
 
     function afterInsertData(err) {
@@ -78,8 +82,8 @@ server.post("/savepoint", (req, res) => {
 server.get("/busca", (req, res) => {
     const search = req.query.city
 
-    if (search == ""){
-        return res.render("search-results.html.html", { total: 0 })
+    if (search == "") {
+        return res.render("search-results.html", { results: [] })
     }
 
     //pegar os dados do banco de dados
@@ -91,14 +95,11 @@ server.get("/busca", (req, res) => {
         console.log("Aqui estão seus registros: ")
         console.log(rows)
 
-        const total = rows.length
-
-        //renderizar no html os dados do bancp de dados
-        return res.render("search-results.html.html", { places: rows, total: total})
+        //renderizar no html os dados do banco de dados
+        return res.render("search-results.html", { results: rows })
     })
-
-    
 })
+
 //ligar o servidor 
 //.listen para ligar o servidor
 server.listen(3000)

@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% set bodyId = "page-map" %}
+
+{% block styles %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; width: 100%; }
+    #center-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    #center-button:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div id="search-container">
+    <h2>Pontos de Coleta</h2>
+    <form id="search-form">
+      <select id="state-select" required>
+        <option value="">Selecione o Estado</option>
+        <option value="SP">São Paulo</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <!-- Adicione mais estados aqui -->
+      </select>
+      <select id="city-select" required>
+        <option value="">Selecione a Cidade</option>
+        <option value="São Paulo">São Paulo</option>
+        <option value="Rio de Janeiro">Rio de Janeiro</option>
+        <!-- Adicione mais cidades aqui -->
+      </select>
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+  <div id="map" style="display: none;"></div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const mapContainer = document.getElementById('map');
+    const searchForm = document.getElementById('search-form');
+    const stateSelect = document.getElementById('state-select');
+    const citySelect = document.getElementById('city-select');
+
+    let map;
+    let markers = [];
+
+    function initializeMap() {
+      if (!map) {
+        map = L.map('map').setView([-23.1067, -48.9252], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data © OpenStreetMap contributors',
+        }).addTo(map);
+      }
+    }
+
+    // Busca pontos do backend
+    async function fetchPontos(estado, cidade) {
+      const res = await fetch('/api/pontos');
+      const pontos = await res.json();
+      return pontos.filter(ponto => ponto.state === estado && ponto.city === cidade);
+    }
+
+    function displayPontos(pontos) {
+      markers.forEach(marker => map.removeLayer(marker));
+      markers = [];
+
+      pontos.forEach(ponto => {
+        if (ponto.lat && ponto.lng) {
+          const marker = L.marker([ponto.lat, ponto.lng]).addTo(map)
+            .bindPopup(`
+              <strong>${ponto.name}</strong><br>
+              ${ponto.address}<br>
+              <em>Resíduos: ${ponto.items}</em>
+            `);
+          markers.push(marker);
+        }
+      });
+
+      if (pontos.length > 0 && pontos[0].lat && pontos[0].lng) {
+        map.setView([pontos[0].lat, pontos[0].lng], 14);
+      }
+    }
+
+    searchForm.addEventListener('submit', async event => {
+      event.preventDefault();
+
+      const estado = stateSelect.value;
+      const cidade = citySelect.value;
+
+      if (estado && cidade) {
+        const pontos = await fetchPontos(estado, cidade);
+
+        if (pontos.length > 0) {
+          mapContainer.style.display = 'block';
+          initializeMap();
+          displayPontos(pontos);
+        } else {
+          alert('Nenhum ponto de coleta encontrado para a seleção.');
+        }
+      } else {
+        alert('Por favor, selecione um estado e uma cidade.');
+      }
+    });
+  </script>
+{% endblock %}
+
+{
+  "version": 2,
+  "builds": [
+    { "src": "src/server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "src/server.js" }
+  ]
+}
