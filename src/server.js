@@ -1,105 +1,90 @@
-const express = require("express")
-const server = express()
+const express = require('express');
+const server = express();
 
-//pegar o banco de dados
-const db = require("./database/db")
+// Pegar o banco de dados
+const db = require('./database/db');
 
-//configurar pasta publica
-//.use configuração especificas do servidor 
-server.use(express.static("public"))
+// Configurar pasta pública
+server.use(express.static('public'));
 
-//habilitar o uso do req.body na nossa aplicação
-server.use(express.urlencoded({ extended: true }))
+// Habilitar o uso do req.body
+server.use(express.urlencoded({ extended: true }));
 
-//utilizando template engine
-const nunjucks = require("nunjucks")
-nunjucks.configure("src/views", {
-    express: server,
-    noCache: true
-})
+// Configurar Nunjucks
+const nunjucks = require('nunjucks');
+nunjucks.configure('src/views', {
+  express: server,
+  noCache: true,
+});
 
-//configurar caminhos da minha aplicação
-//pagina inicial
-//req: Requisição
-//res: REsposta
-//.get é configuração de rota
-server.get("/", (req, res) => {
-    return res.render("index.html")
-})
-server.get("/cadastroponto", (req, res) => {
-    //req.query: QUery STrings da nossa url
-    req.query
+// Configurar rotas
+server.get('/', (req, res) => {
+  return res.render('index.html');
+});
 
-    return res.render("create-point.html")
-})
-server.post("/savepoint", (req, res) => {
-    //req.body: requisilçao do corpo do nosso formulário
-    //console.log(req.body)
+server.get('/cadastroponto', (req, res) => {
+  return res.render('create-point.html');
+});
 
-    //inserir dados no banco de dados
-    //inserir dados na tabela SQL
-    const query = `
-        INSERT INTO places (
-            image,
-            name,
-            address,
-            address2,
-            state,
-            city,
-            items,
-            lat,
-            lng
-        ) VALUES (?,?,?,?,?,?,?,?,?);
-    `
+server.post('/savepoint', (req, res) => {
+  const query = `
+    INSERT INTO places (
+      image,
+      name,
+      address,
+      address2,
+      state,
+      city,
+      items,
+      lat,
+      lng
+    ) VALUES (?,?,?,?,?,?,?,?,?);
+  `;
 
-    const values = [
-        req.body.image,
-        req.body.name,
-        req.body.address,
-        req.body.address2,
-        req.body.state,
-        req.body.city,
-        req.body.items,
-        req.body.lat,
-        req.body.lng
-    ]
+  const values = [
+    req.body.image,
+    req.body.name,
+    req.body.address,
+    req.body.address2,
+    req.body.state,
+    req.body.city,
+    req.body.items,
+    req.body.lat,
+    req.body.lng,
+  ];
 
-    function afterInsertData(err) {
-        if (err) {
-            return console.log(err)
-        }
-        console.log("Cadastrado com sucesso ")
-        console.log(this)
-
-        return res.render("create-point.html", { saved: true })
+  function afterInsertData(err) {
+    if (err) {
+      console.error('Erro ao inserir dados:', err);
+      return res.status(500).render('create-point.html', { error: 'Erro ao salvar ponto' });
     }
+    console.log('Cadastrado com sucesso');
+    console.log(this);
+    return res.render('create-point.html', { saved: true });
+  }
 
-    db.run(query, values, afterInsertData)
+  db.run(query, values, afterInsertData);
+});
 
-    
-})
+server.get('/busca', (req, res) => {
+  const search = req.query.city;
 
-server.get("/busca", (req, res) => {
-    const search = req.query.city
+  if (!search) {
+    return res.render('search-results.html', { results: [] });
+  }
 
-    if (search == "") {
-        return res.render("search-results.html", { results: [] })
+  db.all(`SELECT * FROM places WHERE city LIKE ?`, [`%${search}%`], (err, rows) => {
+    if (err) {
+      console.error('Erro ao buscar dados:', err);
+      return res.status(500).render('search-results.html', { error: 'Erro na busca' });
     }
+    console.log('Registros encontrados:', rows);
+    return res.render('search-results.html', { results: rows });
+  });
+});
 
-    //pegar os dados do banco de dados
-    db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, function (err, rows) {
-        if (err) {
-            return console.log(err)
-        }
-
-        console.log("Aqui estão seus registros: ")
-        console.log(rows)
-
-        //renderizar no html os dados do banco de dados
-        return res.render("search-results.html", { results: rows })
-    })
-})
-
-//ligar o servidor 
-//.listen para ligar o servidor
-server.listen(3000)
+// Ligar o servidor
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
