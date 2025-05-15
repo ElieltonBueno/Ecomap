@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const server = express();
 
-// Pegar o banco de dados
-const db = require('./database/db');
+// Conexão com PostgreSQL
+const pool = require('./database/db');
 
 // Configurar pasta pública
 server.use(express.static('public'));
@@ -17,16 +18,18 @@ nunjucks.configure('src/views', {
   noCache: true,
 });
 
-// Configurar rotas
+// Rota principal
 server.get('/', (req, res) => {
   return res.render('index.html');
 });
 
+// Rota de cadastro
 server.get('/cadastroponto', (req, res) => {
   return res.render('create-point.html');
 });
 
-server.post('/savepoint', (req, res) => {
+// Salvar ponto no banco PostgreSQL
+server.post('/savepoint', async (req, res) => {
   const query = `
     INSERT INTO places (
       image,
@@ -38,7 +41,8 @@ server.post('/savepoint', (req, res) => {
       items,
       lat,
       lng
-    ) VALUES (?,?,?,?,?,?,?,?,?);
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    RETURNING id;
   `;
 
   const values = [
@@ -53,37 +57,37 @@ server.post('/savepoint', (req, res) => {
     req.body.lng,
   ];
 
-  function afterInsertData(err) {
-    if (err) {
-      console.error('Erro ao inserir dados:', err);
-      return res.status(500).render('create-point.html', { error: 'Erro ao salvar ponto' });
-    }
-    console.log('Cadastrado com sucesso');
-    console.log(this);
+  try {
+    const result = await pool.query(query, values);
+    console.log('Cadastrado com sucesso, ID:', result.rows[0].id);
     return res.render('create-point.html', { saved: true });
+  } catch (err) {
+    console.error('Erro ao inserir dados:', err);
+    return res.status(500).render('create-point.html', { error: 'Erro ao salvar ponto' });
   }
-
-  db.run(query, values, afterInsertData);
 });
 
-server.get('/busca', (req, res) => {
+// Rota de busca
+server.get('/busca', async (req, res) => {
   const search = req.query.city;
 
   if (!search) {
     return res.render('search-results.html', { results: [] });
   }
 
-  db.all(`SELECT * FROM places WHERE city LIKE ?`, [`%${search}%`], (err, rows) => {
-    if (err) {
-      console.error('Erro ao buscar dados:', err);
-      return res.status(500).render('search-results.html', { error: 'Erro na busca' });
-    }
-    console.log('Registros encontrados:', rows);
-    return res.render('search-results.html', { results: rows });
-  });
+  try {
+    const result = await pool.query(
+      `SELECT * FROM places WHERE city ILIKE $1`,
+      [`%${search}%`]
+    );
+    return res.render('search-results.html', { results: result.rows });
+  } catch (err) {
+    console.error('Erro ao buscar dados:', err);
+    return res.status(500).render('search-results.html', { error: 'Erro na busca' });
+  }
 });
 
-// Ligar o servidor
+// Iniciar servidor
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

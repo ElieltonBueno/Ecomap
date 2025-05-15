@@ -1,19 +1,18 @@
-// importar a dependência do sqlite3
-const sqlite3 = require('sqlite3').verbose();
+const { Pool } = require('pg')
 
-// criar o objeto que irá fazer operações no banco de dados
-const db = new sqlite3.Database('./src/database/database.db', (err) => {
-  if (err) {
-    return console.error('Erro ao conectar no banco de dados:', err.message);
+// Usa a variável de ambiente DATABASE_URL
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // Necessário no Render
   }
-  console.log('Conectado ao banco de dados SQLite.');
-});
+})
 
-// Criar a tabela 'places' se não existir
-db.serialize(() => {
-  db.run(`
+// Criar a tabela se não existir
+async function initDB() {
+  const createTableQuery = `
     CREATE TABLE IF NOT EXISTS places (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id SERIAL PRIMARY KEY,
       image TEXT,
       name TEXT,
       address TEXT,
@@ -24,14 +23,16 @@ db.serialize(() => {
       lat TEXT,
       lng TEXT
     )
-  `, (err) => {
-    if (err) {
-      console.error('Erro ao criar tabela:', err.message);
-    } else {
-      console.log('Tabela places criada ou já existe');
-    }
-  });
-});
+  `
+  try {
+    await pool.query(createTableQuery)
+    console.log("Tabela 'places' criada com sucesso.")
+  } catch (err) {
+    console.error('Erro ao criar tabela:', err); // Mostra o erro detalhado
+  }
+}
 
-// exportar o banco de dados
-module.exports = db;
+// Executa ao importar
+initDB()
+
+module.exports = pool

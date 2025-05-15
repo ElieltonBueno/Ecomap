@@ -1,0 +1,4 @@
+// Exemplo de bloco catch
+catch (err) {
+  console.error('Erro ao criar tabela:', err); // Mostra o erro detalhado
+}
