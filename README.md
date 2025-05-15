@@ -21,25 +21,22 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ### 💻 Versão Desktop
 
 <h4>🏠 Página Inicial</h4>
+
 <img src="https://github.com/user-attachments/assets/b594aeea-5595-4c00-b3de-f8d1da0aad26" width="500"/>
 
-<h4>📄 Cadastro de Pontos de Coleta</h4>
 <img src="https://github.com/user-attachments/assets/ba5fa698-f164-4b56-8b55-7939d8c4984b" width="500"/>
 
-<h4>🔍 Página de Busca</h4>
 <img src="https://github.com/user-attachments/assets/56947f12-ee20-4331-869f-34069b7529a0" width="500"/>
 
----
 
 ### 📱 Versão Mobile
 
 <h4>🏠 Página Inicial (Mobile)</h4>
+
 <img src="https://github.com/user-attachments/assets/89ccc3c7-9c2c-4be8-b1b7-944d573baa0e" width="300"/>
 
-<h4>📄 Cadastro (Mobile)</h4>
 <img src="https://github.com/user-attachments/assets/85e1c136-d734-4adc-8705-624c04dda95e" width="300"/>
 
-<h4>🔍 Busca (Mobile)</h4>
 <img src="https://github.com/user-attachments/assets/5d3d6948-1f7a-4e1d-8491-cedddb0ed142" width="300"/>
 
 
