@@ -1,233 +1,128 @@
-/* Estilo base para telas maiores (fora dos media queries) */
-.logo {
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
-}
-
-.cadastre-texto {
-    position: absolute;
-    top: -30px; /* Ajuste conforme necessário */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    font-size: 1.2rem;
-    color: #322153; /* Cor escura para combinar com o tema */
-    text-align: center;
-    width: 100%;
-    text-decoration: none; /* Remove sublinhado, se for um link */
-}
-
-.cadastre-texto:hover {
-    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
-}
-
 /* Ajuste para telas pequenas (até 500px) */
 @media (max-width: 500px) {
-    #page-home main {
-        width: 100vw;
-        max-width: 100vw;
-        min-width: 0;
-        padding: 0 4vw;
-        box-sizing: border-box;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    #page-home main h1 {
-        font-size: 7vw;
-        word-break: break-word;
-        text-align: center;
-    }
-    #page-home main p {
-        font-size: 4vw;
-        line-height: 1.4;
-        margin-top: 16px;
-        text-align: center;
-    }
-    #page-home main a {
-        width: 100%;
-        font-size: 4vw;
-        min-width: 0;
-        box-sizing: border-box;
-    }
-    #page-search-results header img, 
-    #page-create-point header img {
-        width: 28vw;
-        max-width: 120px;
-        height: auto;
-    }
-    #page-search-results header a, 
-    #page-create-point header a {
-        font-size: 4vw;
-    }
-    #page-create-point form {
-        padding: 4vw;
-    }
-    #page-create-point form h1 {
-        font-size: 6vw;
-    }
-    #page-create-point form legend span {
-        text-align: right;
-    }
-    #page-home header a.create-point-link {
-        position: static;
-        display: block;
-        margin: 32px auto 0 auto;
-        width: 90vw;
-        max-width: 250px;
-        font-size: 4vw;
-        text-align: center;
-    }
-    .logo {
-        position: relative;
-        margin: 0 auto;
-        width: 28vw;
-        max-width: 120px;
-        height: auto;
-    }
-    .cadastre-texto {
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        font-size: 4vw;
-        text-align: center;
-        width: 100%;
-    }
+  #page-home main {
+      width: 100vw; /* Garante uso total da largura */
+      max-width: 100vw;
+      min-width: 0;
+      padding: 0 4vw; /* Espaçamento lateral proporcional */
+      box-sizing: border-box;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  #page-home main h1 {
+      font-size: 7vw; /* Escala com a tela */
+      word-break: break-word;
+      text-align: center;
+  }
+  #page-home main p {
+      font-size: 4vw;
+      line-height: 1.4;
+      margin-top: 16px;
+      text-align: center;
+  }
+  #page-home main a {
+      width: 100%;
+      font-size: 4vw;
+      min-width: 0;
+      box-sizing: border-box;
+  }
+  #page-search-results header img, 
+  #page-create-point header img {
+      width: 28vw;
+      max-width: 120px;
+      height: auto;
+  }
+  #page-search-results header a, 
+  #page-create-point header a {
+      font-size: 4vw;
+  }
+  #page-create-point form {
+      padding: 4vw;
+  }
+  #page-create-point form h1 {
+      font-size: 6vw;
+  }
+  #page-create-point form legend span {
+      text-align: right;
+  }
+  #page-home header a {
+      position: static; /* Remove o posicionamento absoluto */
+      display: block;
+      margin: 32px auto 0 auto; /* Centraliza e afasta do conteúdo */
+      width: 90vw;
+      max-width: 250px;
+      font-size: 4vw;
+      text-align: center;
+  }
 }
 
 /* Ajuste para telas até 600px */
 @media (max-width: 600px) {
-    #page-search-results main .cards {
-        grid-template-columns: 1fr;
-        margin: 10px 5vw;
-    }
-    .logo {
-        position: relative;
-        margin: 0 auto;
-        width: 28vw;
-        max-width: 120px;
-        height: auto;
-    }
-    .cadastre-texto {
-        position: absolute;
-        top: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        font-size: 3.5vw;
-        text-align: center;
-        width: 100%;
-    }
+  #page-search-results main .cards {
+      grid-template-columns: 1fr;
+      margin: 10px 5vw;
+  }
 }
 
 /* Ajuste para telas até 900px */
 @media (max-width: 900px) {
-    #page-home {
-        background-position-x: 70vw;
-    }
-    #page-home .content {
-        align-items: center;
-        text-align: center;
-    }
-    #page-home header a.create-point-link {
-        position: absolute;
-        bottom: 48px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90vw;
-        max-width: 250px;
-    }
-    #page-home main {
-        align-items: center;
-    }
-    #page-search-results img {
-        height: 150px;
-        max-width: 90vw;
-    }
-    #page-search-results .cards {
-        grid-template-columns: 1fr 1fr;
-        margin: 10px 5vw;
-    }
-    form .field-group {
-        flex-direction: column;
-    }
-    form .field-group .field+.field {
-        margin-left: 0;
-    }
-    .items-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-    .items-grid li {
-        height: 100px;
-        padding: 10px;
-    }
-    #modal .content {
-        width: 90vw;
-        max-width: 300px;
-    }
-    .logo {
-        position: relative;
-        margin: 0 auto;
-        width: 28vw;
-        max-width: 120px;
-        height: auto;
-    }
-    .cadastre-texto {
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        font-size: 3vw;
-        text-align: center;
-        width: 100%;
-    }
+  #page-home {
+      background-position-x: 70vw;
+  }
+  #page-home .content {
+      align-items: center;
+      text-align: center;
+  }
+  #page-home header a {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90vw;
+      max-width: 250px;
+  }
+  #page-home main {
+      align-items: center;
+  }
+  #page-search-results img {
+      height: 150px;
+      max-width: 90vw;
+  }
+  #page-search-results .cards {
+      grid-template-columns: 1fr 1fr;
+      margin: 10px 5vw;
+  }
+  form .field-group {
+      flex-direction: column;
+  }
+  form .field-group .field+.field {
+      margin-left: 0;
+  }
+  .items-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+  }
+  .items-grid li {
+      height: 100px;
+      padding: 10px;
+  }
+  #modal .content {
+      width: 90vw;
+      max-width: 300px;
+  }
 }
-
-/* Ajuste para telas maiores que 1700px */
-@media (min-width: 1700px) {
-    #page-home {
-        background-position-x: 40vw;
-    }
-    .logo {
-        position: relative;
-        margin: 0 auto;
-    }
-    .cadastre-texto {
-        position: absolute;
-        top: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        font-size: 1.5vw;
-        text-align: center;
-        width: 100%;
-    }
+@media (min-width:1700px){
+  #page-home {
+      background-position-x: 40vw;
+  }
 }
-
-/* Ajuste para telas com altura até 760px */
 @media (max-height: 760px) {
-    #page-home {
-        background-position-y: 200px;
-    }
-    .logo {
-        position: relative;
-        margin: 0 auto;
-    }
-    .cadastre-texto {
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1;
-        font-size: 2vw;
-        text-align: center;
-        width: 100%;
-    }
+  #page-home {
+      background-position-y: 200px;
+  }
+  
 }

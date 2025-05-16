@@ -8,28 +8,32 @@
     <link rel="stylesheet" href="./css/modal.css">
 {% endblock styles %}
 
+{#  id="page-home" #}
 {% block content %}
     <div class="content">
         <div></div>
         <header>
-            <div class="logo">
-                <a href="/">
-                    <img src="./assets/logo.svg" alt="Ecomap Logo">
-                </a>
-                <p class="cadastre-texto">Cadastre um ponto de coleta</p>
-            </div>
-            <a href="/cadastroponto" class="create-point-link">
-                <span></span>
+            <a href="/">
+                <img src="./assets/logo.svg" alt="">
             </a>
+            <a href="/cadastroponto">
+                <span></span>
+                Cadastre um ponto de coleta</a>
         </header>
 
         <main>
+
             <h1>Seu marketplace de coleta de resíduos</h1>
+
             <p>Ajudamos pessoas a encontrarem pontos de coletas de forma eficiente</p>
+
             <a href="#">
                 <span></span>
-                <strong>Pesquisar pontos de coletas</strong>
+                <strong>
+                    Pesquisar pontos de coletas
+                </strong>
             </a>
+
         </main>
     </div>
 {% endblock content %}
