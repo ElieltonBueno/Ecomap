@@ -1,119 +1,91 @@
-/* Ajuste para telas pequenas (até 500px) */
-@media (max-width: 500px) {
-  #page-home main {
-      width: 100vw; /* Garante uso total da largura */
-      max-width: 100vw;
-      min-width: 0;
-      padding: 0 4vw; /* Espaçamento lateral proporcional */
-      box-sizing: border-box;
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
-  #page-home main h1 {
-      font-size: 7vw; /* Escala com a tela */
-      word-break: break-word;
-      text-align: center;
-  }
-  #page-home main p {
-      font-size: 4vw;
-      line-height: 1.4;
-      margin-top: 16px;
-      text-align: center;
-  }
-  #page-home main a {
-      width: 100%;
-      font-size: 4vw;
-      min-width: 0;
-      box-sizing: border-box;
-  }
-  #page-search-results header img, 
-  #page-create-point header img {
-      width: 28vw;
-      max-width: 120px;
-      height: auto;
-  }
-  #page-search-results header a, 
-  #page-create-point header a {
-      font-size: 4vw;
-  }
-  #page-create-point form {
-      padding: 4vw;
-  }
-  #page-create-point form h1 {
-      font-size: 6vw;
-  }
-  #page-create-point form legend span {
-      text-align: right;
-  }
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Ajuste para telas até 600px */
-@media (max-width: 600px) {
-  #page-search-results main .cards {
-      grid-template-columns: 1fr;
-      margin: 10px 5vw;
-  }
+html, body {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Ajuste para telas até 900px */
-@media (max-width: 900px) {
-  #page-home {
-      background-position-x: 70vw;
-  }
-  #page-home .content {
-      align-items: center;
-      text-align: center;
-  }
-  #page-home header a {
-      position: absolute;
-      bottom: 48px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90vw;
-      max-width: 250px;
-  }
-  #page-home main {
-      align-items: center;
-  }
-  #page-search-results img {
-      height: 150px;
-      max-width: 90vw;
-  }
-  #page-search-results .cards {
-      grid-template-columns: 1fr 1fr;
-      margin: 10px 5vw;
-  }
-  form .field-group {
-      flex-direction: column;
-  }
-  form .field-group .field+.field {
-      margin-left: 0;
-  }
-  .items-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-  }
-  .items-grid li {
-      height: 100px;
-      padding: 10px;
-  }
-  #modal .content {
-      width: 90vw;
-      max-width: 300px;
-  }
+/* Conteúdo geral */
+#page-home .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 100vw;
 }
-@media (min-width:1700px){
-  #page-home {
-      background-position-x: 40vw;
-  }
+
+#page-home header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
-@media (max-height: 760px) {
-  #page-home {
-      background-position-y: 200px;
-  }
-  
+
+#page-home header a:first-child img {
+  width: 150px;
+  max-width: 80%;
+  height: auto;
+}
+
+#page-home header a:last-child {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #322153;
+  text-decoration: none;
+  font-size: 4vw;
+  text-align: center;
+}
+
+#page-home main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 5vw;
+}
+
+#page-home main h1 {
+  font-size: 7vw;
+  margin-bottom: 10px;
+  color: #322153;
+}
+
+#page-home main p {
+  font-size: 4.5vw;
+  margin-bottom: 20px;
+  color: #6C6C80;
+}
+
+#page-home main a {
+  background-color: #34CB79;
+  color: white;
+  text-decoration: none;
+  padding: 15px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  max-width: 400px;
+  font-size: 4vw;
+}
+
+#page-home main a span {
+  background-image: url('/assets/search-icon.svg'); /* ajuste conforme sua estrutura */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
 }
