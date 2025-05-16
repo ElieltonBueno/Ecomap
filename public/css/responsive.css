@@ -48,6 +48,15 @@
   #page-create-point form legend span {
       text-align: right;
   }
+  #page-home header a {
+      position: static; /* Remove o posicionamento absoluto */
+      display: block;
+      margin: 32px auto 0 auto; /* Centraliza e afasta do conteúdo */
+      width: 90vw;
+      max-width: 250px;
+      font-size: 4vw;
+      text-align: center;
+  }
 }
 
 /* Ajuste para telas até 600px */
